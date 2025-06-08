@@ -1,0 +1,43 @@
+services:
+
+  lambda_iceberg_table_access:
+    container_name: "iceberg_table_access"
+    build:
+      context: ./src/lambdas/iceberg_table_access
+      dockerfile: ../../../lambda.Dockerfile
+      args:
+        PYTHON_VERSION: "3.12"
+        BUILDER_IMAGE: "amazonlinux:2023"
+        FINAL_IMAGE: "public.ecr.aws/lambda/python:3.12"
+        HANDLER: "iceberg_table_access.handler"
+      ssh:
+        - default
+    platform: linux/amd64
+    ports:
+      - "9000:8080"
+    environment:
+      ######################
+      # DO NOT CHANGE THIS #
+      DISABLE_SSL: false
+      SSH_AUTH_SOCK: /ssh-agent
+      ######################
+      # Environment variables for the Lambda function
+      # for local testing
+      REGION: "eu-west-1"
+      ENV: "dev"
+      DATALAKEHOUSE_NAME: "datalakehouse"
+      TABLE_ID: "example_table"
+      ATHENA_OUTPUT_LOCATION: "/service/data/dev/published/data-lake/runtime-bucket"
+      TABLE_DEFINITIONS_FILE: "table_definitions.json"
+      PYTHONPATH: "/var/task/python:/var/task/python/lib/python3.12/site-packages:/var/task/python/lib64/python3.12/site-packages"
+    volumes:
+      ######################
+      # DO NOT CHANGE THIS #
+      - "~/.aws:/root/.aws:ro"
+      - type: bind
+        # Only for MacOS
+        source: /run/host-services/ssh-auth.sock
+        target: /ssh-agent
+      ######################
+      - "./src/lambdas/iceberg_table_access/table_definitions.json:/var/task/table_definitions.json:ro"
+      - "./src/lambdas/iceberg_table_access/iceberg_table_access.py:/var/task/iceberg_table_access.py"

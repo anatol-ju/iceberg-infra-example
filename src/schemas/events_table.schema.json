@@ -1,0 +1,27 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "iceberg-example-table",
+    "title": "iceberg-example-table",
+    "type": "object",
+    "properties": {
+        "uid": {"type": "string"},
+        "ts": {"type": "long"},
+        "details": {
+            "type": "object",
+            "properties": {
+                "lastactive": {"type": "long"},
+                "thingname": {"type": "string"},
+                "thingtypename": {"type": "string"},
+                "thinglocation": {"type": "string"}
+            }
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "version": {"type": "integer"}
+    },
+    "required": ["cid", "uid", "ts"]
+}

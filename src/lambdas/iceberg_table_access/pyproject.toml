@@ -1,0 +1,19 @@
+[project]
+name = "iceberg-table-access"
+version = "1.0.0"
+description = "Lambda to write data from SQS into an Apache Iceberg table."
+authors = [
+    {name = "Anatol Jurenkow", email = "azurius@t-online.de"}
+]
+readme = "README.md"
+requires-python = ">=3.9, <4.0.0"
+dependencies = [
+    "pyiceberg[glue,pandas]"
+]
+
+[tool.poetry]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

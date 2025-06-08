@@ -1,0 +1,42 @@
+{
+  "name": "iceberg-infra-example",
+  "version": "1.0.0",
+  "engines": {
+    "npm": ">=10.2.4 <11.0.0",
+    "node": ">=20.10.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "ls": "cdk ls -c env=dev",
+    "synth": "cdk synth -c env=dev",
+    "diff": "cdk diff -c env=dev --no-change-set",
+    "predeploy:dev": "./scripts/build_images.sh dev",
+    "predeploy:qa": "./scripts/build_images.sh qa",
+    "predeploy:staging": "./scripts/build_images.sh staging",
+    "predeploy:prod": "./scripts/build_images.sh prod",
+    "predeploy:test": "./scripts/build_images.sh dev",
+    "deploy:dev": "cdk deploy -c env=dev --profile example-dev --require-approval never --all",
+    "deploy:qa": "cdk deploy -c env=qa --profile example-qa --require-approval never --all",
+    "deploy:staging": "cdk deploy -c env=staging --profile example-staging --require-approval never --all",
+    "deploy:prod": "cdk deploy -c env=prod --profile example-prod --require-approval never --all",
+    "deploy:test": "cdk deploy -c env=dev --profile example-dev",
+    "destroy:test": "cdk destroy -c env=dev"
+  },
+  "packageManager": "yarn@4.9.2",
+  "dependencies": {
+    "@aws-cdk/aws-glue-alpha": "^2.200.1-alpha.0",
+    "aws-cdk-lib": "^2.200.1",
+    "constructs": "^10.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "volta":{
+    "node": "20.10.0",
+    "yarn": "4.9.2"
+  }
+}

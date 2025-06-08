@@ -1,0 +1,39 @@
+{
+  "app": "npx ts-node --prefer-ts-exts bin/iceberg-tables-example.ts",
+  "watch": {
+    "include": [
+      "**"
+    ],
+    "exclude": [
+      "README.md",
+      "cdk*.json",
+      "**/*.d.ts",
+      "**/*.js",
+      "tsconfig.json",
+      "package*.json",
+      "yarn.lock",
+      "node_modules",
+      "test"
+    ]
+  },
+  "context": {
+    "envs": {
+      "dev": {
+        "account": "111111111111",
+        "region": "eu-west-1"
+      },
+      "qa": {
+        "account": "222222222222",
+        "region": "eu-west-1"
+      },
+      "staging": {
+        "account": "333333333333",
+        "region": "eu-west-1"
+      },
+      "prod": {
+        "account": "444444444444",
+        "region": "eu-west-1"
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+# .dockerignore
+**/.DS_Store
+__pycache__/
+table_definitions.json
